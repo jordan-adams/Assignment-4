@@ -1,0 +1,54 @@
+# Homework 4 Problem 1
+# Jordan Adams
+
+from math import exp
+from pylab import plot,show,xlabel,ylabel
+
+# Imports needed code for graph and math functions
+
+def g(x):
+    return x**4.0*exp(x)*(exp(x)-1)**(-2)
+    
+# User defined function for the integral
+
+def cv(T):
+    pkb=0.00009544104225116996
+    # Constant outside of integral       
+    N=1000
+    # Cubic cm of Al
+    a=0.0
+    b=428.0/T
+    c=(b-a)/N
+    d=0.5*g(b)
+    for k in range(1,N):
+        d+= g(a+k*c)
+    return(c*d*pkb*T**3)
+
+# User defined function for the calculation of the Cv for a given temperature
+
+T=5
+
+# Lower value of concerned temperature range (in Kelvin)
+
+x=[]
+y=[]
+
+# Empty lists to be appended to later
+
+for k in range(1,496): # This range gets to the desired upper temp of 500k
+    x.append(T)
+    y.append(cv(T))
+    T+=1    
+
+print(T)
+plot(x,y)
+
+# Prints temperature and plots the lists from earlier
+
+xlabel("Temperature (K)")
+ylabel("Heat capacity")
+
+# Correctly labels both axes
+
+show()
+# Displays graph
