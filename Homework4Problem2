@@ -1,0 +1,57 @@
+# Homework 4 Problem 2
+# Jordan Adams
+
+from math import exp
+from pylab import plot,show,xlabel,ylabel
+
+# Imports needed code for graph and math functions
+
+def f(t):
+    return exp(t**2)
+
+# User defined function that handles the inside of the integral
+
+def E(x):
+    b=(x-a)/N
+    c=0.5*f(a)+0.5*f(x)
+    for k in range(1,N):
+        c+=f(a+k*b)
+    return b*c
+
+# User defined function that actually calculates the integral
+    
+N=1000
+
+# Number of slices to be used by trapezoidal method of integration
+
+z=[]
+y=[]
+
+# Empty lists to be appended to
+
+x=0.01
+
+#Step size
+
+a=0
+
+# Lower value for concerned x range
+
+while x<3:        
+    z.append(x)
+    y.append(E(x))
+    x+=0.01
+# While block handles the "stepping" along the range of desired x values
+
+plot(z,y)
+
+# Plots the values
+
+xlabel("x")
+ylabel("E(x)")
+
+# Appropriately labels the axes of the graph
+
+show()
+
+# Displays graph
